@@ -1,8 +1,13 @@
-import 'package:cat_facts/auth/view/login_page.dart';
+import 'package:cat_facts/config/route_config.dart';
+import 'package:cat_facts/feature/auth/controller/auth_controller.dart';
+import 'package:cat_facts/feature/home/controller/home_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 void main() {
+  WidgetsFlutterBinding.ensureInitialized();
+  Get.put(AuthController());
+  Get.put(HomeController());
   runApp(const App());
 }
 
@@ -11,13 +16,13 @@ class App extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return GetMaterialApp(
+    return GetMaterialApp.router(
       title: 'Cat Facts',
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
       ),
-      home: LoginPage(),
+      getPages: RouteConfig.routes,
     );
   }
 }

@@ -1,3 +1,4 @@
+import 'package:cat_facts/config/route_config.dart';
 import 'package:cat_facts/feature/auth/controller/auth_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -73,7 +74,7 @@ class LoginPage extends GetView<AuthController> {
               onPressed: () async {
                 final isSuccess = await controller.login();
                 if (isSuccess) {
-                  Get.offNamed('/');
+                  Get.rootDelegate.offNamed(RouteConfig.homeRoute);
                 }
               },
               style: ButtonStyle(
