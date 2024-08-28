@@ -11,7 +11,8 @@ class HomePage extends GetView<HomeController> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Cat Facts'),
+        title: Text('Contacts'),
+        centerTitle: true,
         actions: [
           IconButton(
             onPressed: () {
