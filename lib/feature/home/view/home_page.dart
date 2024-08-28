@@ -1,3 +1,4 @@
+import 'package:cat_facts/config/route_config.dart';
 import 'package:cat_facts/feature/auth/controller/auth_controller.dart';
 import 'package:cat_facts/feature/home/controller/home_controller.dart';
 import 'package:cat_facts/feature/home/view/user_item.dart';
@@ -15,8 +16,12 @@ class HomePage extends GetView<HomeController> {
         centerTitle: true,
         actions: [
           IconButton(
-            onPressed: () {
-              Get.find<AuthController>().logout();
+            onPressed: () async {
+              final auth = Get.find<AuthController>();
+              final isSuccess = await auth.logout();
+              if (isSuccess) {
+                Get.rootDelegate.offNamed(RouteConfig.loginRoute);
+              }
             },
             icon: Icon(
               Icons.exit_to_app,

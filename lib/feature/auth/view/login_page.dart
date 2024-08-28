@@ -46,6 +46,9 @@ class LoginPage extends GetView<AuthController> {
             onChanged: (value) {
               controller.setUsername(value);
             },
+            decoration: InputDecoration(
+              hintText: 'Username',
+            ),
           ),
           SizedBox(height: 12),
           TextFormField(
@@ -55,6 +58,7 @@ class LoginPage extends GetView<AuthController> {
               controller.setPassword(value);
             },
             decoration: InputDecoration(
+              hintText: 'Password',
               suffixIcon: InkWell(
                 onTap: () {
                   controller.togglePassword();

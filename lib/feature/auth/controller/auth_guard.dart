@@ -1,5 +1,5 @@
+import 'package:cat_facts/config/route_config.dart';
 import 'package:cat_facts/feature/auth/controller/auth_controller.dart';
-import 'package:flutter/src/widgets/navigator.dart';
 import 'package:get/get.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -16,7 +16,7 @@ class AuthGuard extends GetMiddleware {
       return await super.redirectDelegate(route);
     }
 
-    return GetNavConfig.fromRoute('/login');
+    return GetNavConfig.fromRoute(RouteConfig.loginRoute);
   }
 
   Future<bool> checkUser() async {

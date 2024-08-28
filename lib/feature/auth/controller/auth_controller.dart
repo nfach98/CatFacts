@@ -43,9 +43,14 @@ class AuthController extends GetxController with StateMixin<bool> {
     return result;
   }
 
-  Future<void> logout() async {
-    await sharedPref.remove(usernameKey);
-    await sharedPref.remove(passwordKey);
-    isAuth(false);
+  Future<bool> logout() async {
+    change(null, status: RxStatus.loading());
+    final removeUsername = await sharedPref.remove(usernameKey);
+    final removePassword = await sharedPref.remove(passwordKey);
+    final result = removeUsername && removePassword;
+
+    change(result, status: result ? RxStatus.success() : RxStatus.error());
+    isAuth(removeUsername && removePassword);
+    return result;
   }
 }
