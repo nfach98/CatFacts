@@ -19,7 +19,7 @@ class App extends StatelessWidget {
     return GetMaterialApp.router(
       title: 'Cat Facts',
       theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
+        colorScheme: ColorScheme.fromSeed(seedColor: Colors.black87),
         useMaterial3: true,
       ),
       getPages: RouteConfig.routes,
