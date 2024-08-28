@@ -5,17 +5,13 @@ import 'package:shared_preferences/shared_preferences.dart';
 class AuthController extends GetxController with StateMixin<bool> {
   var username = ''.obs;
   var password = ''.obs;
-  var isHidePassword = false.obs;
+  var isHidePassword = true.obs;
 
   late SharedPreferences sharedPref;
-  var isAuth = true.obs;
 
   @override
   Future<void> onInit() async {
     sharedPref = await SharedPreferences.getInstance();
-    final username = sharedPref.getString(usernameKey);
-    final password = sharedPref.getString(passwordKey);
-    isAuth(username != null && password != null);
     change(null, status: RxStatus.empty());
     super.onInit();
   }
@@ -32,6 +28,13 @@ class AuthController extends GetxController with StateMixin<bool> {
     isHidePassword.toggle();
   }
 
+  Future<bool> checkUser() async {
+    final username = sharedPref.getString(usernameKey);
+    final password = sharedPref.getString(passwordKey);
+    final result = username != null && password != null;
+    return result;
+  }
+
   Future<bool> login() async {
     change(null, status: RxStatus.loading());
     final setUsername = await sharedPref.setString(usernameKey, username.value);
@@ -39,7 +42,6 @@ class AuthController extends GetxController with StateMixin<bool> {
     final result = setUsername && setPassword;
 
     change(result, status: result ? RxStatus.success() : RxStatus.error());
-    isAuth(setUsername && setPassword);
     return result;
   }
 
@@ -50,7 +52,6 @@ class AuthController extends GetxController with StateMixin<bool> {
     final result = removeUsername && removePassword;
 
     change(result, status: result ? RxStatus.success() : RxStatus.error());
-    isAuth(removeUsername && removePassword);
     return result;
   }
 }

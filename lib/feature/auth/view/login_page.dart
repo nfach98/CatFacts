@@ -59,8 +59,8 @@ class LoginPage extends GetView<AuthController> {
                 decoration: BoxDecoration(
                   gradient: LinearGradient(
                     colors: [
-                      Colors.white.withOpacity(.5),
                       Colors.white.withOpacity(.2),
+                      Colors.white.withOpacity(.5),
                     ],
                     begin: AlignmentDirectional.topStart,
                     end: AlignmentDirectional.bottomEnd,
@@ -74,6 +74,12 @@ class LoginPage extends GetView<AuthController> {
                 child: Column(
                   mainAxisSize: MainAxisSize.min,
                   children: [
+                    Icon(
+                      Icons.contact_emergency,
+                      color: Colors.black,
+                      size: 100,
+                    ),
+                    SizedBox(height: 20),
                     TextFormField(
                       initialValue: controller.username.value,
                       onChanged: (value) {

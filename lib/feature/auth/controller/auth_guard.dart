@@ -24,6 +24,6 @@ class AuthGuard extends GetMiddleware {
     final username = sharedPref.getString('session_username');
     final password = sharedPref.getString('session_password');
 
-    return username != null;
+    return username != null && password != null;
   }
 }
