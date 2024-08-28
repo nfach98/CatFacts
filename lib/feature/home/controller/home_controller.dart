@@ -1,8 +1,8 @@
-import 'package:cat_facts/home/model/fact_model.dart';
+import 'package:cat_facts/feature/home/model/user.dart';
 import 'package:dio/dio.dart';
 import 'package:get/get.dart';
 
-class HomeController extends GetxController with StateMixin<List<FactModel>> {
+class HomeController extends GetxController with StateMixin<List<User>> {
   final dio = Dio(
     BaseOptions(connectTimeout: Duration(seconds: 15)),
   );
@@ -19,12 +19,15 @@ class HomeController extends GetxController with StateMixin<List<FactModel>> {
     change([], status: RxStatus.loading());
 
     try {
-      final result = await dio.get('https://cat-fact.herokuapp.com/facts');
-      final response = result.data as List<dynamic>;
+      final result = await dio.get('https://dummyjson.com/users');
+      final response = result.data['users'] as List<dynamic>;
       final list = response
-          .map((e) => FactModel.fromJson(e as Map<String, dynamic>))
+          .map((e) => User.fromJson(e as Map<String, dynamic>))
           .toList();
-      change(list, status: RxStatus.success());
+      change(
+        list,
+        status: list.isEmpty ? RxStatus.empty() : RxStatus.success(),
+      );
     } catch (e) {
       error = e.toString();
       change([], status: RxStatus.error(e.toString()));
