@@ -16,7 +16,7 @@ class HomeController extends GetxController with StateMixin<List<User>> {
   }
 
   getFacts() async {
-    change([], status: RxStatus.loading());
+    change(null, status: RxStatus.loading());
 
     try {
       final result = await dio.get('https://dummyjson.com/users');
@@ -30,7 +30,7 @@ class HomeController extends GetxController with StateMixin<List<User>> {
       );
     } catch (e) {
       error = e.toString();
-      change([], status: RxStatus.error(e.toString()));
+      change(null, status: RxStatus.error(e.toString()));
     }
   }
 }

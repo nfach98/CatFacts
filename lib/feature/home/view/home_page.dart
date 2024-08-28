@@ -1,5 +1,6 @@
 import 'package:cat_facts/feature/auth/controller/auth_controller.dart';
 import 'package:cat_facts/feature/home/controller/home_controller.dart';
+import 'package:cat_facts/feature/home/view/user_item.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -30,43 +31,7 @@ class HomePage extends GetView<HomeController> {
             padding: EdgeInsets.all(16),
             itemCount: list.length,
             itemBuilder: (_, index) {
-              final user = list[index];
-
-              return Container(
-                decoration: BoxDecoration(
-                  border: Border.all(),
-                  borderRadius: BorderRadius.circular(12),
-                ),
-                padding: EdgeInsets.all(12),
-                child: Row(
-                  children: [
-                    ClipOval(
-                      child: Image.network(
-                        user.image ?? '',
-                        width: 36,
-                        height: 36,
-                      ),
-                    ),
-                    SizedBox(width: 8),
-                    Expanded(
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(
-                            '${user.firstName ?? ''} ${user.lastName ?? ''}',
-                          ),
-                          Text(
-                            user.email ?? '',
-                          ),
-                          Text(
-                            user.phone ?? '',
-                          ),
-                        ],
-                      ),
-                    ),
-                  ],
-                ),
-              );
+              return UserItem(user: list[index]);
             },
             separatorBuilder: (_, __) => SizedBox(height: 12),
           );
